@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+  <header class="header">
+    <h1 class="logo">Retail<span>Store</span></h1>
+  </header>
+  <div class="login-page">
+    <form class="login-form" onsubmit="handleLogin(event)">
+      <h2>Login</h2>
+      <input type="email" id="email" placeholder="Enter your email" required>
+      <input type="password" id="password" placeholder="Enter your password" required>
+      <button type="submit" class="btn-primary">Login</button>
+      <p><a href="forgot-password.html" class="forgot-link">Forgot Password?</a></p>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
