@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout - Exclusive</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">Exclusive</div>
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="catalog.html">Catalog</a></li>
+          <li><a href="cart.html">Cart</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="checkout" class="checkout">
+      <h2>Checkout</h2>
+      <form id="checkout-form">
+        <!-- Billing Details -->
+        <h3>Billing Details</h3>
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email Address" required />
+        <input type="text" placeholder="Shipping Address" required />
+        <input type="tel" placeholder="Phone Number" required />
+
+        <!-- Order Summary -->
+        <h3>Order Summary</h3>
+        <div id="order-summary"></div>
+        <h3 id="total-price">Total: $0.00</h3>
+
+        <!-- Payment Options -->
+        <h3>Payment Options</h3>
+        <div class="payment-options">
+          <label>
+            <input type="radio" name="payment" value="credit-card" required />
+            Credit/Debit Card
+          </label>
+          <div class="card-details hidden">
+            <input type="text" placeholder="Card Number" required />
+            <input type="text" placeholder="Cardholder Name" required />
+            <input type="month" placeholder="Expiry Date" required />
+            <input type="text" placeholder="CVV" required />
+          </div>
+          <label>
+            <input type="radio" name="payment" value="paypal" />
+            PayPal
+          </label>
+          <label>
+            <input type="radio" name="payment" value="cod" />
+            Cash on Delivery
+          </label>
+        </div>
+
+        <button type="submit">Place Order</button>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <p>© 2024 Exclusive. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Checkout -->
+    <script>
+      function loadCheckoutSummary() {
+        const orderSummaryContainer = document.getElementById("order-summary");
+        const totalPriceElement = document.getElementById("total-price");
+
+        // Retrieve cart from localStorage
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        if (cart.length === 0) {
+          orderSummaryContainer.innerHTML = "<p>Your cart is empty.</p>";
+          totalPriceElement.textContent = "Total: $0.00";
+          return;
+        }
+
+        let totalPrice = 0;
+        cart.forEach((item) => {
+          const itemElement = document.createElement("div");
+          itemElement.className = "order-item";
+          itemElement.innerHTML = `<p>${item.name} - $${item.price}</p>`;
+          orderSummaryContainer.appendChild(itemElement);
+          totalPrice += parseFloat(item.price);
+        });
+
+        // Update total price
+        totalPriceElement.textContent = `Total: $${totalPrice.toFixed(2)}`;
+      }
+
+      // Handle form submission
+      document
+        .getElementById("checkout-form")
+        .addEventListener("submit", (e) => {
+          e.preventDefault(); // Prevent default form submission behavior
+
+          // Get selected payment method
+          const paymentMethod = document.querySelector(
+            'input[name="payment"]:checked'
+          );
+          if (!paymentMethod) {
+            alert("Please select a payment method.");
+            console.log("No payment method selected.");
+            return;
+          }
+
+          // Log the selected payment method for debugging
+          console.log(`Payment method selected: ${paymentMethod.value}`);
+
+          // Display a success message for all payment methods
+          alert(
+            `Order placed successfully using ${paymentMethod.value}. Thank you for shopping with Exclusive!`
+          );
+
+          // Clear cart and redirect
+          localStorage.removeItem("cart");
+          console.log("Cart cleared, preparing to redirect...");
+
+          // Direct redirection to confirm it works
+          window.location.href = "/index.html"; // Replace with the correct path if needed
+        });
+
+      // Toggle card details visibility
+      document.querySelectorAll('input[name="payment"]').forEach((input) => {
+        input.addEventListener("change", (e) => {
+          const cardDetails = document.querySelector(".card-details");
+          if (e.target.value === "credit-card") {
+            cardDetails.classList.remove("hidden");
+          } else {
+            cardDetails.classList.add("hidden");
+          }
+        });
+      });
+
+      // Load order summary when the page loads
+      window.onload = loadCheckoutSummary;
+    </script>
+
+    <style>
+      .hidden {
+        display: none;
+      }
+      .card-details {
+        margin: 10px 0;
+      }
+      .card-details input {
+        display: block;
+        margin-bottom: 10px;
+      }
+    </style>
+  </body>
+</html>
