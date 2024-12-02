@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Navigation Bar -->
     <nav class="navbar">
       <ul>
         <li><a href="#home">Home</a></li>
-
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href="login.html">Login</a></li>
+        <li><a href="cart.html">Cart</a></li>
       </ul>
     </nav>
 
@@ -26,6 +27,7 @@
           <li><a href="catalog.html" target="_blank">Catalog</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="cart.html">Cart</a></li>
         </ul>
       </nav>
     </header>
@@ -37,24 +39,35 @@
       <a href="#products" class="btn">Shop Now</a>
     </section>
 
+    <!-- Products Section -->
     <section id="products" class="products">
       <h2>Featured Products</h2>
       <div class="scrollable-product-grid">
         <div class="product-grid">
           <!-- Product 1 -->
-          <div class="product-card">
-            <img src="images/airpds.webp" alt="Product 1" />
+          <div
+            class="product-card"
+            data-id="1"
+            data-name="Airpods Pro 2"
+            data-price="249.00"
+          >
+            <img src="images/airpds.webp" alt="Airpods Pro 2" />
             <h3>Airpods Pro 2</h3>
             <p>$249.00</p>
-            <button>Add to Cart</button>
+            <button onclick="addToCart(event)">Add to Cart</button>
           </div>
 
-          <!-- Product 3 -->
-          <div class="product-card">
-            <img src="images/iphone 16 pro.jpg" alt="Product 3" />
+          <!-- Product 2 -->
+          <div
+            class="product-card"
+            data-id="2"
+            data-name="iPhone 16 Pro"
+            data-price="999.00"
+          >
+            <img src="images/iphone 16 pro.jpg" alt="iPhone 16 Pro" />
             <h3>iPhone 16 Pro</h3>
             <p>$999.00</p>
-            <button>Add to Cart</button>
+            <button onclick="addToCart(event)">Add to Cart</button>
           </div>
         </div>
       </div>
@@ -84,8 +97,29 @@
     <footer class="footer">
       <p>© 2024 Exclusive. All Rights Reserved.</p>
     </footer>
+
+    <!-- JavaScript for Add to Cart -->
     <script>
-      products.js;
+      function addToCart(event) {
+        const productCard = event.target.closest(".product-card");
+        const product = {
+          id: productCard.dataset.id,
+          name: productCard.dataset.name,
+          price: productCard.dataset.price,
+        };
+
+        // Retrieve existing cart or initialize an empty one
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Add product to cart
+        cart.push(product);
+
+        // Update cart in localStorage
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        // Provide feedback to the user
+        alert(`${product.name} has been added to your cart!`);
+      }
     </script>
   </body>
 </html>
