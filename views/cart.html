@@ -22,7 +22,7 @@
       <h2>Your Shopping Cart</h2>
       <div id="cart-items"></div>
       <h3 id="total-price">Total: $0.00</h3>
-      <button id="checkout-btn" onclick="goToCheckout()">
+      <button class="checkout-btn" onclick="goToCheckout()">
         Proceed to Checkout
       </button>
     </section>
@@ -31,65 +31,6 @@
       <p>© 2024 Exclusive. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript to Populate Cart -->
-    <script>
-      function loadCart() {
-        const cartItemsContainer = document.getElementById("cart-items");
-        const totalPriceElement = document.getElementById("total-price");
-
-        // Retrieve cart from localStorage
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-        console.log("Cart data retrieved:", cart); // Debug log
-
-        if (cart.length === 0) {
-          cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
-          totalPriceElement.textContent = "Total: $0.00";
-          return;
-        }
-
-        let totalPrice = 0;
-        cartItemsContainer.innerHTML = ""; // Clear previous items
-
-        cart.forEach((item, index) => {
-          if (item && item.name && !isNaN(item.price)) {
-            console.log("Item being added to display:", item); // Debug log
-            const itemElement = document.createElement("div");
-            itemElement.className = "cart-item";
-            itemElement.innerHTML = `
-              <p>${item.name} - $${item.price.toFixed(2)} x ${item.quantity}</p>
-              <button onclick="removeFromCart(${index})">Remove</button>
-            `;
-            cartItemsContainer.appendChild(itemElement);
-            totalPrice += item.price * item.quantity; // Adjust calculation for quantity
-          } else {
-            console.warn("Invalid item data:", item); // Debug warning if item data is incomplete
-          }
-        });
-
-        // Update total price
-        totalPriceElement.textContent = `Total: $${totalPrice.toFixed(2)}`;
-      }
-
-      function removeFromCart(index) {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        cart.splice(index, 1); // Remove item at index
-        localStorage.setItem("cart", JSON.stringify(cart));
-        console.log("Item removed from cart at index:", index); // Debug log
-        loadCart(); // Reload cart
-      }
-
-      function goToCheckout() {
-        if (JSON.parse(localStorage.getItem("cart"))?.length > 0) {
-          window.location.href = "checkout.html";
-        } else {
-          alert(
-            "Your cart is empty. Please add items before proceeding to checkout."
-          );
-        }
-      }
-
-      // Load cart items when the page loads
-      window.onload = loadCart;
-    </script>
+    <script src="cart.js"></script>
   </body>
 </html>
