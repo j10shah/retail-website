@@ -1,4 +1,4 @@
-const pool = require('../db'); // Adjust path to your DB connection module
+const pool = require('./db'); // Adjust path to your DB connection module
 
 // Fetch all products
 async function fetchProducts(res) {
