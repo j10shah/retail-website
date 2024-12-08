@@ -4,8 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register - Exclusive</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="public/css/style.css" />
   </head>
+
+  <style>
+    input[type="text"] {
+      width: 95%; /* Match width of other fields */
+      padding: 10px; /* Consistent padding */
+      margin: 10px 0; /* Space between fields */
+      border: 1px solid #ccc; /* Same border style */
+      border-radius: 5px; 
+      outline: none; 
+      transition: border-color 0.3s; 
+    }
+
+    input[type="text"]:focus {
+      border-color: #007bff; /* Highlight on focus */
+    }
+  </style>
   <body>
     <div class="form-container">
       <h2>Create Account</h2>
@@ -14,7 +30,7 @@
         <input type="email" placeholder="Email" required />
         <input type="password" placeholder="Password" required />
         <input type="password" placeholder="Confirm Password" required />
-        <button type="submit">Register</button>
+        <button type="submit"></a>Register</button>
       </form>
       <p>Already have an account? <a href="login.html">Login here</a>.</p>
     </div>
