@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Catalog - Exclusive</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="public/css/style.css" />
   </head>
   <body>
-    <!-- Header Section -->
     <header class="header">
       <div class="logo">Exclusive</div>
       <nav class="navbar">
@@ -21,11 +20,9 @@
       </nav>
     </header>
 
-    <!-- Products Section -->
     <section id="products" class="products">
       <h2>Our Product Catalog</h2>
       <div class="product-grid">
-        <!-- Product 2 -->
         <div
           class="product-card"
           data-id="2"
@@ -37,8 +34,6 @@
           <p>$150.00</p>
           <button onclick="addToCart(event)">Add to Cart</button>
         </div>
-
-        <!-- Product 4 -->
         <div
           class="product-card"
           data-id="4"
@@ -50,110 +45,30 @@
           <p>$699.00</p>
           <button onclick="addToCart(event)">Add to Cart</button>
         </div>
-
-        <!-- Product 5 -->
-        <div
-          class="product-card"
-          data-id="5"
-          data-name="Gaming Console"
-          data-price="399.00"
-        >
-          <img src="images/ps5.jpeg" alt="Gaming Console" />
-          <h3>Gaming Console</h3>
-          <p>$399.00</p>
-          <button onclick="addToCart(event)">Add to Cart</button>
-        </div>
-
-        <!-- Product 6 -->
-        <div
-          class="product-card"
-          data-id="6"
-          data-name="Designer Sunglasses"
-          data-price="120.00"
-        >
-          <img src="images/sunglasses.jpeg" alt="Designer Sunglasses" />
-          <h3>Designer Sunglasses</h3>
-          <p>$120.00</p>
-          <button onclick="addToCart(event)">Add to Cart</button>
-        </div>
-
-        <!-- Additional products -->
-        <div
-          class="product-card"
-          data-id="7"
-          data-name="Blender"
-          data-price="120.00"
-        >
-          <img src="images/blender.jpeg" alt="Blender" />
-          <h3>Blender</h3>
-          <p>$120.00</p>
-          <button onclick="addToCart(event)">Add to Cart</button>
-        </div>
-
-        <div
-          class="product-card"
-          data-id="8"
-          data-name="Scooter"
-          data-price="1200.00"
-        >
-          <img src="images/scooter.jpeg" alt="Scooter" />
-          <h3>Scooter</h3>
-          <p>$1200.00</p>
-          <button onclick="addToCart(event)">Add to Cart</button>
-        </div>
-
-        <div
-          class="product-card"
-          data-id="9"
-          data-name="Nike Dunks"
-          data-price="99.00"
-        >
-          <img src="images/dunks.jpeg" alt="Nike Dunks" />
-          <h3>Nike Dunks</h3>
-          <p>$99.00</p>
-          <button onclick="addToCart(event)">Add to Cart</button>
-        </div>
       </div>
     </section>
 
-    <!-- Footer Section -->
+    <div
+      id="notification"
+      style="
+        display: none;
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f0f0f0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+      "
+    >
+      Product added to cart!
+    </div>
+
     <footer class="footer">
       <p>© 2024 Exclusive. All Rights Reserved.</p>
     </footer>
-
-    <!-- JavaScript for Add to Cart -->
-    <script>
-      function addToCart(event) {
-        const productCard = event.target.closest(".product-card");
-        const product = {
-          id: productCard.dataset.id,
-          name: productCard.dataset.name,
-          price: parseFloat(productCard.dataset.price), // Convert price to a number
-          quantity: 1, // Default quantity is 1
-        };
-
-        // Retrieve existing cart or initialize an empty one
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-        // Check if product already exists in the cart
-        const existingItemIndex = cart.findIndex(
-          (item) => item.id === product.id
-        );
-
-        if (existingItemIndex > -1) {
-          // If product exists, increment the quantity
-          cart[existingItemIndex].quantity += 1;
-        } else {
-          // Add new product to the cart
-          cart.push(product);
-        }
-
-        // Update cart in localStorage
-        localStorage.setItem("cart", JSON.stringify(cart));
-
-        // Provide feedback to the user
-        alert(`${product.name} has been added to your cart!`);
-      }
-    </script>
+    <script src="catalog.js"></script>
   </body>
 </html>
