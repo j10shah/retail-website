@@ -4,19 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Exclusive - Online Retail</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="public/css/style.css" />
   </head>
   <body>
     <!-- Navigation Bar -->
-    <nav class="navbar">
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="cart.html">Cart</a></li>
-      </ul>
-    </nav>
 
     <!-- Header Section -->
     <header class="header">
@@ -28,6 +19,7 @@
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="cart.html">Cart</a></li>
+          
         </ul>
       </nav>
     </header>
@@ -69,6 +61,18 @@
             <p>$999.00</p>
             <button onclick="addToCart(event)">Add to Cart</button>
           </div>
+
+          <div
+            class="product-card"
+            data-id="3"
+            data-name="Sony Bravia"
+            data-price="1999.00"
+          >
+            <img src="images/tv.jpeg" alt="iPhone 16 Pro" />
+            <h3>Sony Bravia</h3>
+            <p>$1999.00</p>
+            <button onclick="addToCart(event)">Add to Cart</button>
+          </div>
         </div>
       </div>
     </section>
@@ -98,28 +102,27 @@
       <p>© 2024 Exclusive. All Rights Reserved.</p>
     </footer>
 
+    <!-- Notification -->
+    <div
+      id="notification"
+      style="
+        display: none;
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f0f0f0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+      "
+    >
+      Product added to cart!
+    </div>
+
     <!-- JavaScript for Add to Cart -->
-    <script>
-      function addToCart(event) {
-        const productCard = event.target.closest(".product-card");
-        const product = {
-          id: productCard.dataset.id,
-          name: productCard.dataset.name,
-          price: productCard.dataset.price,
-        };
 
-        // Retrieve existing cart or initialize an empty one
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-        // Add product to cart
-        cart.push(product);
-
-        // Update cart in localStorage
-        localStorage.setItem("cart", JSON.stringify(cart));
-
-        // Provide feedback to the user
-        alert(`${product.name} has been added to your cart!`);
-      }
-    </script>
+    <script src="app.js"></script>
   </body>
 </html>
