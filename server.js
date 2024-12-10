@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { parse } = require('querystring');
-const { handleLogin } = require('./routes/auth');
+const { handleLogin, registerUser } = require('./routes/auth');
 const { fetchProducts, fetchProductDetails } = require('./routes/products');
 
 const PORT = 3000;
@@ -57,7 +57,7 @@ const server = http.createServer((req, res) => {
       if (url === '/login') {
         handleLogin(req, res);
       } else if (url == '/register') {
-
+        registerUser(req, res);
       } else if (url === '/orders') {
         let body = '';
         req.on('data', (chunk) => {

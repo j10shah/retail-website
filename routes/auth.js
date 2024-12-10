@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { createUser } = require('./db');
 const SECRET_KEY = 'your_secret_key'; // Replace with a secure key
 
 // Mock user data (replace with a database query in a real app)
@@ -41,6 +42,33 @@ function handleLogin(req, res) {
     });
 }
 
+// Function to handle user registration
+async function registerUser(req, res) {
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+
+    req.on('end', async () => {
+        const { username, email, password } = JSON.parse(body);
+
+        try {
+            // Hash the password before saving
+            const passwordHash = await bcrypt.hash(password, 10);
+
+            // Create the user in the database
+            const userId = await createUser(username, email, passwordHash);
+
+            res.writeHead(201, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'User registered successfully', userId }));
+        } catch (error) {
+            console.error('Error during user registration:', error.message);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Failed to register user' }));
+        }
+    });
+}
+
 // Middleware to verify the token
 function verifyToken(req, res, next) {
     const authHeader = req.headers['authorization'];
@@ -67,4 +95,5 @@ function verifyToken(req, res, next) {
 module.exports = {
     handleLogin,
     verifyToken,
+    registerUser
 };

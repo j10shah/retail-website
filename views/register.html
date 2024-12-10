@@ -5,34 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register - Exclusive</title>
     <link rel="stylesheet" href="public/css/style.css" />
+    <style>
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        width: 95%; /* Match width of other fields */
+        padding: 10px; /* Consistent padding */
+        margin: 10px 0; /* Space between fields */
+        border: 1px solid #ccc; /* Same border style */
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s;
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="password"]:focus {
+        border-color: #007bff; /* Highlight on focus */
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .form-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      #message {
+        margin-top: 10px;
+        font-size: 14px;
+      }
+    </style>
   </head>
-
-  <style>
-    input[type="text"] {
-      width: 95%; /* Match width of other fields */
-      padding: 10px; /* Consistent padding */
-      margin: 10px 0; /* Space between fields */
-      border: 1px solid #ccc; /* Same border style */
-      border-radius: 5px; 
-      outline: none; 
-      transition: border-color 0.3s; 
-    }
-
-    input[type="text"]:focus {
-      border-color: #007bff; /* Highlight on focus */
-    }
-  </style>
   <body>
     <div class="form-container">
       <h2>Create Account</h2>
-      <form action="#" method="post">
-        <input type="text" placeholder="Full Name" required />
-        <input type="email" placeholder="Email" required />
-        <input type="password" placeholder="Password" required />
-        <input type="password" placeholder="Confirm Password" required />
-        <button type="submit"></a>Register</button>
+      <form id="registerForm" action="#" method="post">
+        <input type="text" id="username" placeholder="Full Name" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+        <button type="submit">Register</button>
       </form>
+      <div id="message"></div>
       <p>Already have an account? <a href="login.html">Login here</a>.</p>
     </div>
+    <script>
+      document.getElementById('registerForm').addEventListener('submit', async function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const email = document.getElementById('email').value.trim();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const messageDiv = document.getElementById('message');
+
+        messageDiv.textContent = ''; // Clear previous messages
+
+        // Validate passwords match
+        if (password !== confirmPassword) {
+          messageDiv.style.color = 'red';
+          messageDiv.textContent = 'Passwords do not match.';
+          return;
+        }
+
+        try {
+          const response = await fetch('/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, email, password }),
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            messageDiv.style.color = 'green';
+            messageDiv.textContent = 'Registration successful! Redirecting...';
+            setTimeout(() => {
+              window.location.href = '/login.html'; // Redirect to login page
+            }, 2000);
+          } else {
+            messageDiv.style.color = 'red';
+            messageDiv.textContent = result.message || 'Registration failed. Please try again.';
+          }
+        } catch (error) {
+          messageDiv.style.color = 'red';
+          messageDiv.textContent = 'An error occurred. Please try again.';
+          console.error('Error during registration:', error);
+        }
+      });
+    </script>
   </body>
 </html>
