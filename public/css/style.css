@@ -53,6 +53,7 @@ a:hover {
   padding: 40px 20px;
   background-color: #000000;
   color: white;
+  font-family: 'Lobster', cursive; /* Apply the fancy font */
 }
 
 .header .logo {
