@@ -40,6 +40,8 @@ const server = http.createServer((req, res) => {
         serveStaticFile(res, filePath, mimeType[ext] || 'text/plain');
       } else if (url === '/login.html') {
         serveStaticFile(res, path.join(__dirname, 'views', 'login.html'), 'text/html');
+      } else if (url === '/register.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'register.html'), 'text/html');
       } else if (url === '/products.html') {
         fetchProducts(res);
       } else if (url.startsWith('/products/')) {
@@ -54,6 +56,8 @@ const server = http.createServer((req, res) => {
     if (method === 'POST') {
       if (url === '/login') {
         handleLogin(req, res);
+      } else if (url == '/register') {
+
       } else if (url === '/orders') {
         let body = '';
         req.on('data', (chunk) => {
