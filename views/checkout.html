@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Checkout - Exclusive</title>
     <link rel="stylesheet" href="public/css/style.css" />
+    <!-- Include PayPal SDK with your Client ID -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&components=buttons"></script> 
   </head>
   <body>
     <header class="header">
@@ -47,6 +49,7 @@
             <input type="radio" name="payment" value="paypal" />
             PayPal
           </label>
+          <div id="paypal-button-container" class="hidden"></div> <!-- PayPal button container -->
           <label>
             <input type="radio" name="payment" value="cod" />
             Cash on Delivery
