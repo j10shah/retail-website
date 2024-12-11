@@ -40,8 +40,12 @@ const server = http.createServer((req, res) => {
         serveStaticFile(res, filePath, mimeType[ext] || 'text/plain');
       } else if (url === '/login.html') {
         serveStaticFile(res, path.join(__dirname, 'views', 'login.html'), 'text/html');
+      } else if (url === '/catalog.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'catalog.html'), 'text/html');
       } else if (url === '/register.html') {
         serveStaticFile(res, path.join(__dirname, 'views', 'register.html'), 'text/html');
+      } else if (url === '/cart.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'cart.html'), 'text/html'); 
       } else if (url === '/products.html') {
         fetchProducts(res);
       } else if (url.startsWith('/products/')) {
