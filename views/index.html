@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Exclusive - Online Retail</title>
-    <link rel="stylesheet" href="/public/css/style.css" />
+    <link rel="stylesheet" href="/retail-website-main/public/css/style.css" />
   </head>
   <body>
     <!-- Navigation Bar -->
@@ -20,6 +20,7 @@
           <li><a href="#contact">Contact</a></li>
           <li><a href="cart.html">Cart</a></li>
           <li><a href="login.html">Login</a></li>
+          <li><a href="business.html">BUSINESS</a></li>
         </ul>
       </nav>
     </header>
@@ -28,7 +29,7 @@
     <section id="home" class="hero">
       <h1>Welcome to Exclusive</h1>
       <p>Your one-stop shop for exclusive deals and products!</p>
-      <a href="#products" class="btn">Shop Now</a>
+      <a href="catalog.html" class="btn">Shop Now</a>
     </section>
 
     <!-- Products Section -->
@@ -43,10 +44,12 @@
             data-name="Airpods Pro 2"
             data-price="249.00"
           >
-            <img src="images/airpds.webp" alt="Airpods Pro 2" />
+            <img
+              src="/retail-website-main/images/airpds.webp"
+              alt="Airpods Pro 2"
+            />
             <h3>Airpods Pro 2</h3>
             <p>$249.00</p>
-            <button onclick="addToCart(event)">Add to Cart</button>
           </div>
 
           <!-- Product 2 -->
@@ -56,10 +59,12 @@
             data-name="iPhone 16 Pro"
             data-price="999.00"
           >
-            <img src="images/iphone 16 pro.jpg" alt="iPhone 16 Pro" />
+            <img
+              src="/retail-website-main/images/iphone 16 pro.jpg"
+              alt="iPhone 16 Pro"
+            />
             <h3>iPhone 16 Pro</h3>
             <p>$999.00</p>
-            <button onclick="addToCart(event)">Add to Cart</button>
           </div>
 
           <div
@@ -68,10 +73,23 @@
             data-name="Sony Bravia"
             data-price="1999.00"
           >
-            <img src="images/tv.jpeg" alt="iPhone 16 Pro" />
+            <img
+              src="/retail-website-main/images/tv.jpeg"
+              alt="iPhone 16 Pro"
+            />
             <h3>Sony Bravia</h3>
             <p>$1999.00</p>
-            <button onclick="addToCart(event)">Add to Cart</button>
+          </div>
+
+          <div
+            class="product-card"
+            data-id="4"
+            data-name="blender"
+            data-price="999.00"
+          >
+            <img src="/retail-website-main/images/blender.jpeg" alt="blender" />
+            <h3>Blender</h3>
+            <p>$999.00</p>
           </div>
         </div>
       </div>
@@ -123,6 +141,6 @@
 
     <!-- JavaScript for Add to Cart -->
 
-    <script src="public/js/index.js"></script>
+    <script src="/retail-website-main/public/js/index.js"></script>
   </body>
 </html>
