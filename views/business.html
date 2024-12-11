@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Business Page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#add-product">Add Product</a></li>
+      </ul>
+    </div>
+
+    <!-- Header Section -->
+    <div class="header">
+      <h1 class="logo">Business Product Management</h1>
+    </div>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+      <h2>Your Products</h2>
+      <div id="product-list" class="product-list">
+        <!-- Dynamic product cards will be added here -->
+      </div>
+    </section>
+
+    <!-- Add Product Section -->
+    <section id="add-product" class="form-container">
+      <h2>Add a New Product</h2>
+      <form id="add-product-form">
+        <label for="product-name">Product Name:</label>
+        <input
+          type="text"
+          id="product-name"
+          placeholder="Enter product name"
+          required
+        />
+
+        <label for="product-description">Description:</label>
+        <textarea
+          id="product-description"
+          placeholder="Enter product description"
+          rows="3"
+          required
+        ></textarea>
+
+        <label for="product-price">Price ($):</label>
+        <input
+          type="number"
+          id="product-price"
+          placeholder="Enter product price"
+          min="0"
+          step="0.01"
+          required
+        />
+
+        <label for="product-image">Image URL:</label>
+        <input
+          type="url"
+          id="product-image"
+          placeholder="Enter product image URL"
+          required
+        />
+
+        <label for="product-category">Category:</label>
+        <select id="product-category" required>
+          <option value="">Select a category</option>
+          <option value="electronics">Electronics</option>
+          <option value="fashion">Fashion</option>
+          <option value="home">Home</option>
+          <option value="beauty">Beauty</option>
+        </select>
+
+        <button type="submit">Add Product</button>
+      </form>
+    </section>
+
+    <script>
+      // JavaScript to manage products dynamically
+      const productList = document.getElementById("product-list");
+      const addProductForm = document.getElementById("add-product-form");
+
+      // Handle adding a new product
+      addProductForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Get form values
+        const name = document.getElementById("product-name").value;
+        const description = document.getElementById(
+          "product-description"
+        ).value;
+        const price = document.getElementById("product-price").value;
+        const imageUrl = document.getElementById("product-image").value;
+        const category = document.getElementById("product-category").value;
+
+        // Create product card
+        const productCard = document.createElement("div");
+        productCard.className = "product-card";
+        productCard.innerHTML = `
+                <img src="${imageUrl}" alt="${name}">
+                <h3>${name}</h3>
+                <p>${description}</p>
+                <p><strong>Price:</strong> $${price}</p>
+                <p><strong>Category:</strong> ${category}</p>
+                <button class="remove-btn">Delete</button>
+            `;
+
+        // Add delete functionality
+        productCard
+          .querySelector(".remove-btn")
+          .addEventListener("click", () => {
+            productList.removeChild(productCard);
+          });
+
+        // Add card to product list
+        productList.appendChild(productCard);
+
+        // Clear form
+        addProductForm.reset();
+      });
+
+      document
+        .getElementById("add-product-form")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const productData = {
+            productName: document.getElementById("product-name").value,
+            description: document.getElementById("product-description").value,
+            price: document.getElementById("product-price").value,
+            imageUrl: document.getElementById("product-image").value,
+            category: document.getElementById("product-category").value,
+          };
+
+          fetch("/add-product", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(productData),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              alert(data.message);
+              // Optionally refresh or reload product list
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+    </script>
+  </body>
+</html>
