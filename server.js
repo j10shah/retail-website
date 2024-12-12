@@ -4,6 +4,7 @@ const path = require('path');
 const { parse } = require('querystring');
 const { handleLogin, registerUser } = require('./routes/auth');
 const { fetchProducts, fetchProductDetails } = require('./routes/products');
+const { addProducts, removeProduct } = require('./routes/businessProducts');
 
 const PORT = 3000;
 
@@ -46,6 +47,8 @@ const server = http.createServer((req, res) => {
         serveStaticFile(res, path.join(__dirname, 'views', 'register.html'), 'text/html');
       } else if (url === '/cart.html') {
         serveStaticFile(res, path.join(__dirname, 'views', 'cart.html'), 'text/html'); 
+      } else if (url === '/business.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'business.html'), 'text/html'); 
       } else if (url === '/products.html') {
         fetchProducts(res);
       } else if (url.startsWith('/products/')) {
@@ -62,6 +65,8 @@ const server = http.createServer((req, res) => {
         handleLogin(req, res);
       } else if (url == '/register') {
         registerUser(req, res);
+      } else if (url == '/add-product') {
+        addProducts(req, res);
       } else if (url === '/orders') {
         let body = '';
         req.on('data', (chunk) => {
