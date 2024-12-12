@@ -51,6 +51,10 @@ const server = http.createServer((req, res) => {
         serveStaticFile(res, path.join(__dirname, 'views', 'business.html'), 'text/html'); 
       } else if (url === '/products.html') {
         fetchProducts(res);
+      } else if (url === '/index.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'index.html'), 'text/html'); 
+      } else if (url === '/checkout.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'checkout.html'), 'text/html'); 
       } else if (url.startsWith('/products/')) {
         const productId = url.split('/')[2];
         fetchProductDetails(res, productId);
