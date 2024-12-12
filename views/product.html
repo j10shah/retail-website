@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details</title>
+    <link rel="stylesheet" href="/retail-website-main/public/css/style.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+      }
+
+      .navbar {
+        background-color: #000000;
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navbar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+
+      .navbar ul li {
+        margin: 0 10px;
+      }
+
+      .navbar ul li a {
+        color: white;
+        text-decoration: none;
+      }
+
+      .product-details {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-details img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      .product-details h2 {
+        font-size: 24px;
+        margin-top: 20px;
+      }
+
+      .product-details p {
+        font-size: 16px;
+        margin: 10px 0;
+      }
+
+      .product-details .price {
+        font-size: 20px;
+        font-weight: bold;
+        color: #000000;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <h1>Product Details</h1>
+      <ul>
+        <li><a href="products.html">Back to Products</a></li>
+      </ul>
+    </div>
+
+    <!-- Product Details Section -->
+    <div id="product-details" class="product-details">
+      <!-- Product details will be dynamically loaded here -->
+    </div>
+
+    <script>
+      // Function to get query parameter value by name
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      // Fetch product ID from query string
+      const productId = getQueryParam("productId");
+
+      // Example product data (would typically come from a server or database)
+      const products = {
+        1: {
+          name: "Smartphone",
+          description:
+            "High-performance smartphone with excellent camera quality.",
+          price: "$699",
+          image: "/path/to/image1.jpg",
+        },
+        2: {
+          name: "Running Shoes",
+          description:
+            "Comfortable and durable shoes for all your fitness needs.",
+          price: "$129",
+          image: "/path/to/image2.jpg",
+        },
+        3: {
+          name: "Wireless Headphones",
+          description: "Experience immersive sound with noise cancellation.",
+          price: "$199",
+          image: "/path/to/image3.jpg",
+        },
+        4: {
+          name: "Coffee Maker",
+          description: "Brew your favorite coffee with ease and convenience.",
+          price: "$89",
+          image: "/path/to/image4.jpg",
+        },
+      };
+
+      // Fetch product details based on product ID
+      const product = products[productId];
+
+      // Display product details
+      if (product) {
+        const productDetailsContainer =
+          document.getElementById("product-details");
+        productDetailsContainer.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h2>${product.name}</h2>
+        <p>${product.description}</p>
+        <p class="price">${product.price}</p>
+      `;
+      } else {
+        document.getElementById("product-details").innerHTML =
+          "<p>Product not found.</p>";
+      }
+    </script>
+  </body>
+</html>
