@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Overview</title>
+  <link rel="stylesheet" href="public/css/style.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .info {
+      margin: 20px 0;
+      font-size: 1.1rem;
+    }
+    .info p {
+      margin: 10px 0;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 1rem;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Account Overview</h1>
+    <div class="info">
+      <p><strong>Full Name:</strong> John Doe</p>
+      <p><strong>Email:</strong> john.doe@example.com</p>
+      <p><strong>Phone Number:</strong> +1 123-456-7890</p>
+      <p><strong>Address:</strong> 123 Main St, Springfield, USA</p>
+    </div>
+    <a href="order-history.html" class="btn">View Order History</a>
+  </div>
+  <script>
+    // Example: Replace placeholders with data from the logged-in user
+    const userData = {
+      name: "John Doe",
+      email: "john.doe@example.com",
+      phone: "+1 123-456-7890",
+      address: "123 Main St, Springfield, USA"
+    };
+
+    document.querySelector(".info").innerHTML = `
+      <p><strong>Full Name:</strong> ${userData.name}</p>
+      <p><strong>Email:</strong> ${userData.email}</p>
+      <p><strong>Phone Number:</strong> ${userData.phone}</p>
+      <p><strong>Address:</strong> ${userData.address}</p>
+    `;
+  </script>
+</body>
+</html>

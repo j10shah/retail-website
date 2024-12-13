@@ -45,6 +45,12 @@ async function getUserByEmail(email) {
     return results[0];  // Return the first match (or undefined if not found)
 }
 
+async function getBusinessUserByEmail(email) {
+    const query = 'SELECT * FROM BusinessUsers WHERE email = ?';
+    const results = await queryDatabase(query, [email]);
+    return results[0];  // Return the first match (or undefined if not found)
+}
+
 // Example function: Create a new user
 async function createUser(username, email, passwordHash) {
     const query = `
@@ -62,12 +68,29 @@ async function createUser(username, email, passwordHash) {
     }
 }
 
+async function createBusinessUser(email, passwordHash) {
+    const query = `
+        INSERT INTO BusinessUsers (email, password_hash)
+        VALUES (?, ?)
+    `;
+    
+    try {
+        const results = await queryDatabase(query, [email, passwordHash]);
+        console.log('Business User created:', results); // Log the result for debugging
+        return results.insertId; // Return the newly created user's ID
+    } catch (error) {
+        console.error('Error creating user:', error.message); // Log the error if it happens
+        throw error; // Rethrow the error to be caught by the calling function
+    }
+}
 
 // Export the pool and utility functions
 module.exports = {
     queryDatabase,
     getUserByUsername,
     createUser,
+    createBusinessUser,
+    getBusinessUserByEmail,
     pool,
     getUserByEmail
 };

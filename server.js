@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { parse } = require('querystring');
-const { handleLogin, registerUser } = require('./routes/auth');
+const { handleLogin, handleBusinessLogin, registerUser, registerBusinessUser } = require('./routes/auth');
 const { fetchProducts, fetchProductDetails } = require('./routes/products');
 const { addProducts, removeProduct } = require('./routes/businessProducts');
 
@@ -47,14 +47,22 @@ const server = http.createServer((req, res) => {
         serveStaticFile(res, path.join(__dirname, 'views', 'register.html'), 'text/html');
       } else if (url === '/cart.html') {
         serveStaticFile(res, path.join(__dirname, 'views', 'cart.html'), 'text/html'); 
-      } else if (url === '/business.html') {
-        serveStaticFile(res, path.join(__dirname, 'views', 'business.html'), 'text/html'); 
+      } else if (url === '/login-business.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'login-business.html'), 'text/html'); 
+      } else if (url === '/signup-business.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'signup-business.html'), 'text/html'); 
       } else if (url === '/products.html') {
         fetchProducts(res);
       } else if (url === '/index.html') {
         serveStaticFile(res, path.join(__dirname, 'views', 'index.html'), 'text/html'); 
       } else if (url === '/checkout.html') {
         serveStaticFile(res, path.join(__dirname, 'views', 'checkout.html'), 'text/html'); 
+      } else if (url === '/login-index.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'login-index.html'), 'text/html');
+      } else if (url === '/account-overview.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'account-overview.html'), 'text/html');
+      } else if (url === '/order-history.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'order-history.html'), 'text/html');
       } else if (url.startsWith('/products/')) {
         const productId = url.split('/')[2];
         fetchProductDetails(res, productId);
@@ -69,6 +77,10 @@ const server = http.createServer((req, res) => {
         handleLogin(req, res);
       } else if (url == '/register') {
         registerUser(req, res);
+      } else if (url == '/business-login') {
+        handleBusinessLogin(req, res);
+      } else if (url == '/business-signup') {
+        registerBusinessUser(req, res);
       } else if (url == '/add-product') {
         addProducts(req, res);
       } else if (url === '/orders') {

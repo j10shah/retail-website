@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order History</title>
+  <link rel="stylesheet" href="public/css/style.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .order-list {
+      list-style: none;
+      padding: 0;
+    }
+    .order-item {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .order-item p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Order History</h1>
+    <ul class="order-list">
+      <!-- Example Order Items -->
+      <li class="order-item">
+        <p><strong>Order ID:</strong> #001</p>
+        <p><strong>Date:</strong> 2024-12-01</p>
+        <p><strong>Total:</strong> $149.99</p>
+        <p><strong>Status:</strong> Delivered</p>
+      </li>
+      <li class="order-item">
+        <p><strong>Order ID:</strong> #002</p>
+        <p><strong>Date:</strong> 2024-12-05</p>
+        <p><strong>Total:</strong> $249.99</p>
+        <p><strong>Status:</strong> In Transit</p>
+      </li>
+    </ul>
+  </div>
+  <script>
+    // Example: Replace with dynamic data from a database
+    const orderData = [
+      {
+        id: "#001",
+        date: "2024-12-01",
+        total: "$149.99",
+        status: "Delivered"
+      },
+      {
+        id: "#002",
+        date: "2024-12-05",
+        total: "$249.99",
+        status: "In Transit"
+      }
+    ];
+
+    const orderList = document.querySelector(".order-list");
+    orderList.innerHTML = orderData.map(order => `
+      <li class="order-item">
+        <p><strong>Order ID:</strong> ${order.id}</p>
+        <p><strong>Date:</strong> ${order.date}</p>
+        <p><strong>Total:</strong> ${order.total}</p>
+        <p><strong>Status:</strong> ${order.status}</p>
+      </li>
+    `).join("");
+  </script>
+</body>
+</html>
