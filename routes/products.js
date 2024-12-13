@@ -1,11 +1,11 @@
-const pool = require('./db'); // Adjust path to your DB connection module
-
+///const pool = require('./db'); // Adjust path to your DB connection module
+const { queryDatabase, pool } = require('./db');
 // Fetch all products
 async function fetchProducts(res) {
     try {
         const result = await pool.query('SELECT * FROM products');
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify(result.rows));
+        res.end(JSON.stringify(result[0]));
     } catch (err) {
         console.error('Error fetching products:', err);
         res.writeHead(500, { 'Content-Type': 'application/json' });

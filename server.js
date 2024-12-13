@@ -67,9 +67,8 @@ const server = http.createServer((req, res) => {
         serveStaticFile(res, path.join(__dirname, 'views', 'account-overview.html'), 'text/html');
       } else if (url === '/order-history.html') {
         serveStaticFile(res, path.join(__dirname, 'views', 'order-history.html'), 'text/html');
-      } else if (url.startsWith('/products/')) {
-        const productId = url.split('/')[2];
-        fetchProductDetails(res, productId);
+      } else if (url == '/api/products') {
+        fetchProducts(res);
       } else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('404 - Not Found');
