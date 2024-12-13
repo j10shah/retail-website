@@ -61,6 +61,12 @@ const server = http.createServer((req, res) => {
         serveStaticFile(res, path.join(__dirname, 'views', 'index.html'), 'text/html'); 
       } else if (url === '/checkout.html') {
         serveStaticFile(res, path.join(__dirname, 'views', 'checkout.html'), 'text/html'); 
+      } else if (url === '/login-index.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'login-index.html'), 'text/html');
+      } else if (url === '/account-overview.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'account-overview.html'), 'text/html');
+      } else if (url === '/order-history.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'order-history.html'), 'text/html');
       } else if (url.startsWith('/products/')) {
         const productId = url.split('/')[2];
         fetchProductDetails(res, productId);

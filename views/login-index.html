@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exclusive - Online Retail</title>
+    <link rel="stylesheet" href="/public/css/style.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+
+    <!-- Header Section -->
+    <header class="header">
+      <div class="logo">Exclusive</div>
+      <nav class="navbar">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="catalog.html" target="_blank">Catalog</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="cart.html">Cart</a></li>
+          <li><a href="login-business.html">BUSINESS</a></li>
+        </ul>
+      </nav>
+      <!-- Account Overview Dropdown -->
+      <div class="account-overview" style="position: absolute; top: 10px; right: 10px;">
+        <button class="account-button">Account Overview</button>
+        <div class="dropdown-menu" style="display: none; position: absolute; top: 30px; left: 0; background: #f9f9f9; border: 1px solid #ccc; padding: 10px;">
+          <a href="account-overview.html">Overview</a><br />
+          <a href="order-history.html">Order History</a><br />
+          <a href="index.html">Log Out</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <h1>Welcome to Exclusive</h1>
+      <p>Your one-stop shop for exclusive deals and products!</p>
+      <a href="catalog.html" class="btn">Shop Now</a>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+      <h2>Featured Products</h2>
+      <div class="scrollable-product-grid">
+        <div class="product-grid">
+          <!-- Product 1 -->
+          <div
+            class="product-card"
+            data-id="1"
+            data-name="Airpods Pro 2"
+            data-price="249.00"
+          >
+            <img src="/images/airpds.webp" alt="Airpods Pro 2" />
+            <h3>Airpods Pro 2</h3>
+            <p>$249.00</p>
+          </div>
+
+          <!-- Product 2 -->
+          <div
+            class="product-card"
+            data-id="2"
+            data-name="iPhone 16 Pro"
+            data-price="999.00"
+          >
+            <img src="/images/iphone 16 pro.jpg" alt="iPhone 16 Pro" />
+            <h3>iPhone 16 Pro</h3>
+            <p>$999.00</p>
+          </div>
+
+          <div
+            class="product-card"
+            data-id="3"
+            data-name="Sony Bravia"
+            data-price="1999.00"
+          >
+            <img src="/images/tv.jpeg" alt="iPhone 16 Pro" />
+            <h3>Sony Bravia</h3>
+            <p>$1999.00</p>
+          </div>
+
+          <div
+            class="product-card"
+            data-id="4"
+            data-name="blender"
+            data-price="999.00"
+          >
+            <img src="/images/blender.jpeg" alt="blender" />
+            <h3>Blender</h3>
+            <p>$999.00</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <h2>About Us</h2>
+      <p>
+        At Exclusive, we provide premium quality products at unbeatable prices.
+        Our mission is to bring the best shopping experience to our customers.
+      </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <h2>Contact Us</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea placeholder="Your Message" rows="4" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2024 Exclusive. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Notification -->
+    <div
+      id="notification"
+      style="
+        display: none;
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f0f0f0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+      "
+    >
+      Product added to cart!
+    </div>
+
+    <!-- JavaScript for Account Overview Dropdown -->
+    <script>
+      const accountButton = document.querySelector(".account-button");
+      const dropdownMenu = document.querySelector(".dropdown-menu");
+
+      accountButton.addEventListener("click", () => {
+        const isHidden = dropdownMenu.style.display === "none";
+        dropdownMenu.style.display = isHidden ? "block" : "none";
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!accountButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+          dropdownMenu.style.display = "none";
+        }
+      });
+    </script>
+
+    <!-- JavaScript for Add to Cart -->
+    <script src="/retail-website-main/public/js/index.js"></script>
+  </body>
+</html>
