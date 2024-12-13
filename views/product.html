@@ -69,6 +69,23 @@
         color: #000000;
         margin-top: 10px;
       }
+
+      .product-details .add-to-cart {
+        display: block;
+        margin: 20px 0;
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        text-align: center;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .product-details .add-to-cart:hover {
+        background-color: #218838;
+      }
     </style>
   </head>
   <body>
@@ -137,7 +154,14 @@
         <h2>${product.name}</h2>
         <p>${product.description}</p>
         <p class="price">${product.price}</p>
+        <button class="add-to-cart" data-id="${productId}">Add to Cart</button>
       `;
+
+        // Add event listener to the "Add to Cart" button
+        document.querySelector(".add-to-cart").addEventListener("click", () => {
+          alert(`${product.name} has been added to your cart!`);
+          // Add logic here to update the cart in your database or local storage
+        });
       } else {
         document.getElementById("product-details").innerHTML =
           "<p>Product not found.</p>";
