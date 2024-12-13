@@ -49,10 +49,14 @@ const server = http.createServer((req, res) => {
         serveStaticFile(res, path.join(__dirname, 'views', 'cart.html'), 'text/html'); 
       } else if (url === '/login-business.html') {
         serveStaticFile(res, path.join(__dirname, 'views', 'login-business.html'), 'text/html'); 
+      } else if (url === '/business.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'business.html'), 'text/html'); 
       } else if (url === '/signup-business.html') {
         serveStaticFile(res, path.join(__dirname, 'views', 'signup-business.html'), 'text/html'); 
       } else if (url === '/products.html') {
-        fetchProducts(res);
+        serveStaticFile(res, path.join(__dirname, 'views', 'products.html'), 'text/html'); 
+      } else if (url === '/product.html') {
+        serveStaticFile(res, path.join(__dirname, 'views', 'product.html'), 'text/html'); 
       } else if (url === '/index.html') {
         serveStaticFile(res, path.join(__dirname, 'views', 'index.html'), 'text/html'); 
       } else if (url === '/checkout.html') {
@@ -63,9 +67,8 @@ const server = http.createServer((req, res) => {
         serveStaticFile(res, path.join(__dirname, 'views', 'account-overview.html'), 'text/html');
       } else if (url === '/order-history.html') {
         serveStaticFile(res, path.join(__dirname, 'views', 'order-history.html'), 'text/html');
-      } else if (url.startsWith('/products/')) {
-        const productId = url.split('/')[2];
-        fetchProductDetails(res, productId);
+      } else if (url == '/api/products') {
+        fetchProducts(res);
       } else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('404 - Not Found');

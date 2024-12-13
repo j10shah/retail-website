@@ -102,78 +102,73 @@
       const productList = document.getElementById("product-list");
       const addProductForm = document.getElementById("add-product-form");
 
-      // Handle adding a new product
       addProductForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
         // Get form values
-        const name = document.getElementById("product-name").value;
-        const description = document.getElementById(
-          "product-description"
-        ).value;
-        const price = document.getElementById("product-price").value;
-        const stock = document.getElementById("product-stock").value;
-        const sku = document.getElementById("product-sku").value;
-        const imageUrl = document.getElementById("product-image").value;
-        const category = document.getElementById("product-category").value;
+        const productData = {
+          productName: document.getElementById("product-name").value,
+          description: document.getElementById("product-description").value,
+          price: document.getElementById("product-price").value,
+          stock: document.getElementById("product-stock").value,
+          sku: document.getElementById("product-sku").value,
+          imageUrl: document.getElementById("product-image").value,
+          category: document.getElementById("product-category").value,
+        };
+
+        // Check if all fields are filled
+        if (
+          !productData.productName ||
+          !productData.description ||
+          !productData.price ||
+          !productData.stock ||
+          !productData.sku ||
+          !productData.imageUrl ||
+          !productData.category
+        ) {
+          alert("Please fill out all fields before submitting.");
+          return;
+        }
 
         // Create product card
         const productCard = document.createElement("div");
         productCard.className = "product-card";
         productCard.innerHTML = `
-                <img src="${imageUrl}" alt="${name}">
-                <h3>${name}</h3>
-                <p>${description}</p>
-                <p><strong>Price:</strong> $${price}</p>
-                <p><strong>Stock:</strong> ${stock}</p>
-                <p><strong>SKU:</strong> ${sku}</p>
-                <p><strong>Category:</strong> ${category}</p>
-                <button class="remove-btn">Delete</button>
-            `;
+          <img src="${productData.imageUrl}" alt="${productData.productName}">
+          <h3>${productData.productName}</h3>
+          <p>${productData.description}</p>
+          <p><strong>Price:</strong> $${productData.price}</p>
+          <p><strong>Stock:</strong> ${productData.stock}</p>
+          <p><strong>SKU:</strong> ${productData.sku}</p>
+          <p><strong>Category:</strong> ${productData.category}</p>
+          <button class="remove-btn">Delete</button>
+        `;
 
         // Add delete functionality
-        productCard
-          .querySelector(".remove-btn")
-          .addEventListener("click", () => {
-            productList.removeChild(productCard);
-          });
+        productCard.querySelector(".remove-btn").addEventListener("click", () => {
+          productList.removeChild(productCard);
+        });
 
         // Add card to product list
         productList.appendChild(productCard);
 
+        // Send data to the server
+        fetch("/add-product", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(productData),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            alert(data.message);
+          })
+          .catch((error) => console.error("Error:", error));
+
         // Clear form
         addProductForm.reset();
       });
-
-      document
-        .getElementById("add-product-form")
-        .addEventListener("submit", (e) => {
-          e.preventDefault();
-
-          const productData = {
-            productName: document.getElementById("product-name").value,
-            description: document.getElementById("product-description").value,
-            price: document.getElementById("product-price").value,
-            stock: document.getElementById("product-stock").value,
-            sku: document.getElementById("product-sku").value,
-            imageUrl: document.getElementById("product-image").value,
-            category: document.getElementById("product-category").value,
-          };
-
-          fetch("/add-product", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(productData),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              alert(data.message);
-              // Optionally refresh or reload product list
-            })
-            .catch((error) => console.error("Error:", error));
-        });
     </script>
   </body>
 </html>

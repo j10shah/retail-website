@@ -132,5 +132,33 @@
         <button class="add-to-cart">Add to Cart</button>
       </div>
     </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        fetch('/api/products')
+          .then(response => response.json())
+          .then(data => {
+            const productsContainer = document.querySelector('.products-container');
+            productsContainer.innerHTML = ''; // Clear any hardcoded products
+    
+            data.forEach(product => {
+              const productCard = document.createElement('div');
+              productCard.className = 'product-card';
+    
+              productCard.innerHTML = `
+                <img src="${product.image_url}" alt="${product.name}" />
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <p class="price">$${product.price}</p>
+                <a href="product.html?productId=${product.id}" class="details-link">View Details</a>
+              `;
+    
+              productsContainer.appendChild(productCard);
+            });
+          })
+          .catch(error => {
+            console.error('Error fetching products:', error);
+          });
+      });
+    </script>
   </body>
 </html>
