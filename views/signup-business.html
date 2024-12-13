@@ -125,7 +125,7 @@
           required
         />
 
-        <button type="submit"><a href="login-business.html"></a>Sign up</button>
+        <button type="submit">Sign up</button>
 
         <a href="#" class="link" id="show-login"
           >Already have an account? Log in</a
@@ -154,8 +154,8 @@
       document.getElementById("login-form").addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
 
         const loginData = { email, password };
 
@@ -170,22 +170,26 @@
           .then((data) => {
             if (data.success) {
               alert("Login successful!");
-              // Redirect or perform additional actions on success
             } else {
               alert(data.message || "Login failed. Please try again.");
             }
           })
-          .catch((error) => console.error("Error:", error));
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again later.");
+          });
       });
 
       document.getElementById("signup-form").addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const email = document.getElementById("signup-email").value;
-        const password = document.getElementById("signup-password").value;
-        const confirmPassword = document.getElementById(
-          "signup-confirm-password"
-        ).value;
+        const email = document.getElementById("signup-email").value.trim();
+        const password = document
+          .getElementById("signup-password")
+          .value.trim();
+        const confirmPassword = document
+          .getElementById("signup-confirm-password")
+          .value.trim();
 
         if (password !== confirmPassword) {
           alert("Passwords do not match. Please try again.");
@@ -205,14 +209,16 @@
           .then((data) => {
             if (data.success) {
               alert("Sign up successful!");
-              // Optionally redirect to login or perform additional actions
               signupContainer.style.display = "none";
               loginContainer.style.display = "block";
             } else {
               alert(data.message || "Sign up failed. Please try again.");
             }
           })
-          .catch((error) => console.error("Error:", error));
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again later.");
+          });
       });
     </script>
   </body>
